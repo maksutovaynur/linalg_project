@@ -62,8 +62,7 @@ def center(signal):
 def white(signal):
     matrix = np.cov(signal)
     w, E = np.linalg.eig(matrix)
-    wsq = np.sqrt(w)
-    D = np.diag(wsq)
+    D = np.sqrt(np.linalg.pinv(np.diag(w)))
     M = E @ D @ E.T
     return M @ signal
 
